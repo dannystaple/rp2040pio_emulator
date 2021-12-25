@@ -57,16 +57,19 @@ clean: objclean
 
 distclean: objclean bkpclean coreclean
 
-tarball: distclean
-	@TGZ_DATE=`date +%Y-%m-%d_%H-%M-%S` ; \
-	PROJECT_NAME=rpi2040pio ; \
-	PROJECT_PATH=`basename \`pwd\`` ; \
-	TGZ_PREFIX=$$PROJECT_NAME\_$$TGZ_DATE ; cd .. ; \
-	tar cvf ./$$TGZ_PREFIX.tar.bz2 \
-		--exclude=untracked \
-		--exclude=.git \
-		--transform=s/$$PROJECT_PATH/$$TGZ_PREFIX/ \
-		--bzip2 $$PROJECT_PATH
+src_tarball: distclean
+		@TGZ_DATE=$$(date +%Y-%m-%d_%H-%M-%S) ;\
+		PROJECT_NAME=rpi2040pio ;\
+		PROJECT_PATH=$$(basename $$(pwd)) ;\
+		TGZ_PREFIX=$${PROJECT_NAME}\_$${TGZ_DATE} ;\
+		echo ${TGZ_PREFIX} ;\
+		export TAR_CMD="tar cvf ./$$TGZ_PREFIX.tar.bz2 \
+			--exclude=untracked \
+			--exclude=.git \
+			--transform=s/$$PROJECT_PATH/$$TGZ_PREFIX/ \
+			--bzip2 $$PROJECT_PATH" ;\
+		echo $$TAR_CMD ;\
+		cd .. && $$TAR_CMD
 
 #  Local Variables:
 #    coding:utf-8
