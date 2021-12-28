@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  build_jar:
+  build_jars:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,4 +20,9 @@ jobs:
       
       - name: build
         run: |
-          make tarball
+          make all
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: jar
+          path: jars/
