@@ -22,9 +22,9 @@ jobs:
         run: |
           make all
           ls -l
-          ls -l jars
+          ls -l jar
 
       - uses: actions/upload-artifact@v2
         with:
           name: jar
-          path: jars/
+          path: jar/
