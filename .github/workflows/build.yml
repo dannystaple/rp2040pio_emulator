@@ -1,0 +1,30 @@
+name: "build"
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build_jars:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      # setup make (expected?)
+      # setup JDK (openjdk?)
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      
+      - name: build
+        run: |
+          make all
+          ls -l
+          ls -l jar
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: jar
+          path: jar/
