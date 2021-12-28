@@ -21,6 +21,8 @@ jobs:
       - name: build
         run: |
           make all
+          ls -l
+          ls -l jars
 
       - uses: actions/upload-artifact@v2
         with:
